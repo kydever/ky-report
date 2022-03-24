@@ -12,11 +12,12 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, onMounted, watch } from 'vue'
+import { reactive, onMounted, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+// const { pathToRegexp } = require("path-to-regexp");
 
 const data = reactive({
-    levelList: []
+    levelList: <any>[]
 })
 
 const router = useRouter()

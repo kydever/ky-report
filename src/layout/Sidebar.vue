@@ -2,7 +2,7 @@
     <div class="sidebar">
         <el-scrollbar>
             <el-menu
-                default-active="/report/list"
+                :default-active="activeSidebar"
                 background-color="#304156"
                 text-color="#BFCBD9"
                 unique-opened="true"
@@ -42,12 +42,22 @@
 
 <script setup lang="ts">
 import { useStore } from "@/store/menu";
-import { defineProps } from 'vue'
+import { defineProps, onMounted, ref } from 'vue'
+import { useRoute } from 'vue-router'
 
 const props = defineProps({
     collapse: Boolean
 })
 const { menus } = useStore()
+
+const activeSidebar = ref('')
+
+const route = useRoute()
+
+onMounted(() => {
+    activeSidebar.value = route.path
+})
+
 </script>
 
 <style lang="scss" scoped>

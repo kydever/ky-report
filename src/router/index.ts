@@ -1,7 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import report from './children/report'
+import single from './children/single'
 
 const frameIn = [
+    single,
     report
 ]
 
