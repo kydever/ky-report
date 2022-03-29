@@ -15,4 +15,5 @@ jobs:
       - name: Run Test Cases
         run: |
           yarn
+          yarn run build
           yarn run test
