@@ -24,7 +24,7 @@
 </template>
 
 <script setup lang="ts">
-import Dialog from "./modules/Dialog.vue"
+import Dialog from "./modules/dialog.vue"
 import Timeline from "./modules/Timeline.vue"
 import { ref, reactive, getCurrentInstance, onMounted } from "vue"
 import { getRoport } from "@/api/report.ts"
