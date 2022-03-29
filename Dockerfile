@@ -9,9 +9,6 @@ RUN yarn run build
 
 FROM nginx:alpine
 
-ENV VUE_APP_BASE_API=/api \
-    VUE_APP_FILE_PREFIX=/uploads
-
 COPY --from=builder /usr/src/build/dist /opt/app
 COPY --from=builder /usr/src/build/app.conf /etc/nginx/conf.d/
 
