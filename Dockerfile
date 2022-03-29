@@ -5,7 +5,7 @@ ADD yarn.lock /usr/src/build
 RUN yarn
 COPY . /usr/src/build
 WORKDIR /usr/src/build
-RUN NODE_OPTIONS=--openssl-legacy-provider yarn run build
+RUN yarn run build
 
 FROM nginx:alpine
 
