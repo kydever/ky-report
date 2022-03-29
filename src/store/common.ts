@@ -1,21 +1,27 @@
-import { defineStore } from 'pinia'
+import { defineStore } from "pinia"
+
+interface StoreState {
+	sidebar: {
+		open: boolean
+	}
+}
 
 export const useStore = defineStore({
-    id: 'common',
+	id: "common",
 
-    state: () => ({
-        sidebar: {
-            open: false
-        }
-    }),
+	state: () => ({
+		sidebar: {
+			open: false,
+		},
+	}),
 
-    getters: {
-        opened: state => state.sidebar.open
-    },
+	getters: {
+		opened: (state: StoreState) => state.sidebar.open,
+	},
 
-    actions: {
-        toggleSideBar() {
-            this.sidebar.open = !this.sidebar.open
-        }
-    }
+	actions: {
+		toggleSideBar() {
+			this.sidebar.open = !this.sidebar.open
+		},
+	},
 })

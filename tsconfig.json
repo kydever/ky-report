@@ -9,10 +9,12 @@
         "sourceMap": true,
         "resolveJsonModule": true,
         "esModuleInterop": true,
+        "removeComments": true,
         "lib": ["esnext", "dom"],
         "paths": {
             "@/*": ["./src/*"]
-        }
+        },
+        "types": ["vitest/globals"]
     },
     "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
     "references": [{ "path": "./tsconfig.node.json" }]

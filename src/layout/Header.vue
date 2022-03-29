@@ -1,23 +1,23 @@
 <template>
-    <div class="header">
-        <div class="header__left">
-            <Hamburger />
+  <div class="header">
+    <div class="header__left">
+      <Hamburger />
 
-            <Breadcrumb />
-        </div>
-
-        <el-dropdown trigger="click">
-            <el-icon style="margin-right: 8px; margin-top: 1px">
-                <setting />
-            </el-icon>
-            <span>{{ user.usernaem || 'Admin' }}</span>
-            <template #dropdown>
-                <el-dropdown-menu>
-                    <el-dropdown-item>登出</el-dropdown-item>
-                </el-dropdown-menu>
-            </template>
-        </el-dropdown>
+      <Breadcrumb />
     </div>
+
+    <el-dropdown trigger="click">
+      <el-icon style="margin-right: 8px; margin-top: 1px">
+        <setting />
+      </el-icon>
+      <span>{{ user.usernaem || 'Admin' }}</span>
+      <template #dropdown>
+        <el-dropdown-menu>
+          <el-dropdown-item>登出</el-dropdown-item>
+        </el-dropdown-menu>
+      </template>
+    </el-dropdown>
+  </div>
 </template>
 
 <script setup lang="ts">

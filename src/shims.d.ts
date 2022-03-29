@@ -1,0 +1,5 @@
+declare module "pinia"
+declare module "@element-plus/icons"
+declare module "js-cookie"
+declare module "@vitejs/plugin-legacy"
+declare module "element-plus"
