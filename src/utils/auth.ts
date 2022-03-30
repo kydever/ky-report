@@ -20,7 +20,7 @@ export function getUserInfo() {
 }
 
 export function setUserInfo(user: any) {
-	return Cookies.get(User, user, { expires: 1 })
+	return Cookies.set(User, user, { expires: 1 })
 }
 
 export function removeUserInfo() {
