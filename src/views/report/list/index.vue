@@ -5,12 +5,6 @@
 	<el-table :data="data.tableData" border style="width: 100%">
 		<el-table-column align="center" prop="id" label="ID" />
 		<el-table-column align="center" prop="dt" label="日期" />
-
-		<!-- <el-table-column align="center" prop="address" label="日报条目" />
-            <el-table-column align="center" prop="address" label="项目名" />
-            <el-table-column align="center" prop="address" label="模块名" />
-            <el-table-column align="center" prop="address" label="工作内容" />
-            <el-table-column align="center" prop="address" label="时间" /> -->
 		<el-table-column align="center" label="操作" fixed="right">
 			<template #default="scope">
 				<el-button
@@ -30,7 +24,7 @@
 <script setup lang="ts">
 import Dialog from "./modules/Dialog.vue"
 import Timeline from "./modules/Timeline.vue"
-import { ref, reactive, getCurrentInstance, onMounted } from "vue"
+import { ref, reactive, onMounted } from "vue"
 import { getRoport } from "@/api/report"
 
 let data: any = reactive({
@@ -53,10 +47,11 @@ const getList = async () => {
 		limit: limit.value,
 	}
 	let res = await getRoport(params)
-	data.tableData = res
+	data.tableData = Array(30).fill(res[0])
 }
 
-const handleAction = (type: string, argu?: an) => {
+const handleAction = (type: string, argu?: any) => {
+	console.log(props.scrollRef)
 	let { id, dt, items } = argu || {}
 	switch (type) {
 		case "add":

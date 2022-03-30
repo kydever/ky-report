@@ -14,3 +14,4 @@ dist
 .eslintrc.js
 .prettierrc
 /src/mock/*
+*.scss

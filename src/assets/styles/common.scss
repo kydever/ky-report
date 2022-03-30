@@ -1,3 +1,18 @@
-.mb-5 {
-    margin-bottom: 20px;
+@for $i from 1 through 12 {
+	.mt-#{$i} {
+		margin-top: $i * 4px;
+	}
+	.mr-#{$i} {
+		margin-right: $i * 4px;
+	}
+	.mb-#{$i} {
+		margin-bottom: $i * 4px;
+	}
+	.ml-#{$i} {
+		margin-left: $i * 4px;
+	}
+}
+
+.el-scrollbar__bar {
+	z-index: 9999;
 }
