@@ -32,14 +32,15 @@ router.beforeEach(async (to, from, next) => {
 		} else if (whiteList.includes(to.path)) {
 			next()
 		} else {
-			// const params = { redirect_url: "http://localhost:3000/login" }
-			// await authorize(params)
-			next({
-				path: "/login",
-				query: {
-					code: "hdOAZjDZH_mSIT0KfPrJJxIHBhiQwRGMTGCIuBEUbbE",
-				},
-			})
+			const params = { redirect_url: "https://daily-report.knowyourself.cc/login" }
+			await authorize(params)
+			next()
+			// next({
+			// path: "/login",
+			// query: {
+			// code: "hdOAZjDZH_mSIT0KfPrJJxIHBhiQwRGMTGCIuBEUbbE",
+			// },
+			// })
 		}
 	}
 })
