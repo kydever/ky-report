@@ -32,7 +32,7 @@ router.beforeEach(async (to, from, next) => {
 		} else if (whiteList.includes(to.path)) {
 			next()
 		} else {
-			const params = { redirect_url: "https://daily-report.knowyourself.cc/login" }
+			const params = { redirect_uri: "https://daily-report.knowyourself.cc/login" }
 			await authorize(params)
 			next()
 			// next({
