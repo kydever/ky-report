@@ -1,6 +1,8 @@
 import { ElMessage } from "element-plus"
 import { getToken } from "@/utils/auth"
 
+const base_url = "/api"
+
 const getUrlString = (data: any) => {
 	const dataArr: string[] = []
 	if (Object.keys(data).length) {
@@ -24,6 +26,7 @@ const fetchApi = async (url: string, opts: object) => {
 		...opts,
 	}
 
+	url = base_url + url
 	return await fetch(url, options)
 		.then(async res => {
 			const { code, data, message } = await res.clone().json()

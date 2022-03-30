@@ -1,11 +1,13 @@
 import { defineStore } from "pinia"
-import { getToken, setToken, removeToken } from "@/utils/auth"
-import { login } from "@/api/common.ts"
-
-interface loginType {
-	username: String
-	password: String
-}
+import {
+	getToken,
+	setToken,
+	removeToken,
+	setUserInfo,
+	getUserInfo,
+	removeUserInfo,
+} from "@/utils/auth"
+import { login } from "@/api/common"
 
 export const useStore = defineStore({
 	id: "user",
@@ -19,20 +21,26 @@ export const useStore = defineStore({
 	actions: {
 		async login(code: string) {
 			let params = { code }
-			const {
-				token,
-				user: { name, avatar },
-			} = await login(params)
-			const res = await login(params)
+			const { token, user } = await login(params)
+			this.token = token
+			this.name = user.name
+			this.avatar = user.avatar
+			setToken(token)
+			setUserInfo(user)
+		},
+
+		init() {
+			const { name, avatar } = getUserInfo()
+			const token = getToken()
 			this.token = token
 			this.name = name
 			this.avatar = avatar
-			setToken(token)
 		},
 
 		resetToken() {
 			return new Promise(resolve => {
 				removeToken() // must remove  token  first
+				removeUserInfo()
 				this.name = ""
 				this.token = ""
 				this.avatar = ""

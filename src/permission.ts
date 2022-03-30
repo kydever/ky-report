@@ -5,7 +5,6 @@ import { ElMessage } from "element-plus"
 // import 'nprogress/nprogress.css' // progress bar style
 import { getToken } from "@/utils/auth" // get token from cookie
 import { getPageTitle } from "@/utils"
-import { authorize, login } from "@/api/common.ts"
 
 // NProgress.configure({ showSpinner: false }) // NProgress Configuration
 
@@ -20,7 +19,12 @@ router.beforeEach(async (to, from, next) => {
 	const store = useStore()
 
 	if (hasToken) {
-		next()
+		if (store.name) {
+			next()
+		} else {
+			await store.init()
+			next()
+		}
 	} else {
 		if (to.path === "/login") {
 			const {
