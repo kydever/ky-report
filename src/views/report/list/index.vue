@@ -51,7 +51,6 @@ const getList = async () => {
 }
 
 const handleAction = (type: string, argu?: any) => {
-	console.log(props.scrollRef)
 	let { id, dt, items } = argu || {}
 	switch (type) {
 		case "add":
