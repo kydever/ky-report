@@ -32,15 +32,11 @@ router.beforeEach(async (to, from, next) => {
 		} else if (whiteList.includes(to.path)) {
 			next()
 		} else {
-			const params = { redirect_uri: "https://daily-report.knowyourself.cc/login" }
-			await authorize(params)
+			const href = window.location.href
+			const redirect_uri = href + "login"
+			const url = href + `api/oauth/authorize?redirect_uri=${redirect_uri}`
+			window.location.href = url
 			next()
-			// next({
-			// path: "/login",
-			// query: {
-			// code: "hdOAZjDZH_mSIT0KfPrJJxIHBhiQwRGMTGCIuBEUbbE",
-			// },
-			// })
 		}
 	}
 })
