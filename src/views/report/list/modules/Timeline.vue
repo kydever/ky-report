@@ -47,7 +47,7 @@ const init = (timeline: Array<any>) => {
 	dialogVisible.value = true
 }
 
-const deleteItem = async (id, index) => {
+const deleteItem = async (id: number, index: number) => {
 	ElMessageBox.confirm("是否确定删除该日报", "提醒", {
 		confirmButtonText: "确定",
 		cancelButtonText: "取消",

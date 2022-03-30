@@ -47,7 +47,7 @@ const getList = async () => {
 		limit: limit.value,
 	}
 	let res = await getRoport(params)
-	data.tableData = Array(30).fill(res[0])
+	data.tableData = res
 }
 
 const handleAction = (type: string, argu?: any) => {

@@ -16,11 +16,11 @@ export function removeToken() {
 }
 
 export function getUserInfo() {
-	return Cookies.get(User)
+	return JSON.parse(Cookies.get(User))
 }
 
 export function setUserInfo(user: any) {
-	return Cookies.set(User, user, { expires: 1 })
+	return Cookies.set(User, JSON.stringify(user), { expires: 1 })
 }
 
 export function removeUserInfo() {
