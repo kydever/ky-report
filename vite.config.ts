@@ -42,10 +42,10 @@ export default defineConfig({
     },
     server: {
         proxy: {
-            '/ky-api': {
+            '/api': {
                 target: 'https://daily-report.knowyourself.cc/api',
                 changeOrigin: true, //是否跨域
-                rewrite: (path) => path.replace(/^\/ky-api/, ""),
+                rewrite: (path) => path.replace(/^\/api/, ""),
             },
             '/api': {
                 target: 'http://127.0.0.1:5001',

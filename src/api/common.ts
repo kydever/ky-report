@@ -1,5 +1,5 @@
 import fetchApi from "../plugins/fetch/index"
-const base_url = "/ky-api/oauth"
+const base_url = "/api/oauth"
 
 export const authorize = (data: object) => fetchApi.get(base_url + "/authorize", data)
 // export const authorize = (data: object) => fetchApi.get("/api/auth", data)
