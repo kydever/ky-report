@@ -1,8 +1,8 @@
 import { defineStore } from "pinia"
 import { getToken, setToken, removeToken } from "@/utils/auth"
-import { authorize, login } from "@/api/common.ts"
+import { login } from "@/api/common.ts"
 
-interface login {
+interface loginType {
 	username: String
 	password: String
 }
@@ -16,22 +16,18 @@ export const useStore = defineStore({
 		avatar: "",
 	}),
 
-	getters: {
-		name: state => state.name,
-	},
-
 	actions: {
-		async login(userinfo: login) {
-			// const { token } = await login(userinfo)
-			const token = "12313"
+		async login(code: string) {
+			let params = { code }
+			const {
+				token,
+				user: { name, avatar },
+			} = await login(params)
+			const res = await login(params)
 			this.token = token
+			this.name = name
+			this.avatar = avatar
 			setToken(token)
-		},
-
-		async getInfo() {
-			const params = { redirect_url: "http://127.0.0.1:9501/oauth/login" }
-			const res = await authorize(params)
-			console.log(11, res)
 		},
 
 		resetToken() {

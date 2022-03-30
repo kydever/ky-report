@@ -1,4 +1,5 @@
 import { ElMessage } from "element-plus"
+import { getToken } from "@/utils/auth"
 
 const getUrlString = (data: any) => {
 	const dataArr: string[] = []
@@ -12,25 +13,25 @@ const getUrlString = (data: any) => {
 	return dataArr.join("&")
 }
 
-const defaultOptions = {
-	headers: {
-		"Content-Type": "application/json",
-		Accept: "application/json",
-	},
-}
-
 const fetchApi = async (url: string, opts: object) => {
 	const options = {
-		...defaultOptions,
+		cache: "no-store",
+		headers: {
+			"Content-Type": "application/json;charset=utf-8",
+			credentials: "include",
+			topsession: getToken(),
+		},
 		...opts,
 	}
 
 	return await fetch(url, options)
 		.then(async res => {
-			console.log(1, res.json())
-			const { code, data, msg } = await res.clone().json()
-			console.log(2, code, data, msg)
-			return code === 1 ? data : msg
+			const { code, data, message } = await res.clone().json()
+			if (code === 0) {
+				return Promise.resolve(data)
+			} else {
+				return Promise.reject(message)
+			}
 		})
 		.catch(err => {
 			ElMessage.error(err)
@@ -51,7 +52,7 @@ fetchApi.get = async (url: string, params = {}) => {
 fetchApi.post = async (url: string, data: object) => {
 	return await fetchApi(url, {
 		method: "POST",
-		body: data,
+		body: JSON.stringify(data),
 	})
 }
 

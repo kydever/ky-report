@@ -5,62 +5,43 @@ import { ElMessage } from "element-plus"
 // import 'nprogress/nprogress.css' // progress bar style
 import { getToken } from "@/utils/auth" // get token from cookie
 import { getPageTitle } from "@/utils"
+import { authorize, login } from "@/api/common.ts"
 
 // NProgress.configure({ showSpinner: false }) // NProgress Configuration
 
-const whiteList = ["/login"] // no redirect whitelist
+const whiteList = ["/404"] // no redirect whitelist
 
 router.beforeEach(async (to, from, next) => {
-	// start progress bar
-	// NProgress.start()
-
 	// set page title
 	document.title = getPageTitle(to.meta.title)
 
 	// determine whether the user has logged in
-	const hasToken = getToken()
+	let hasToken = getToken()
 	const store = useStore()
 
 	if (hasToken) {
-		if (to.path === "/login") {
-			// if is logged in, redirect to the home page
-			next({ path: "/home" })
-			// NProgress.done()
-		} else {
-			if (store.name) {
-				next()
-			} else {
-				try {
-					// get user info
-					await store.getInfo()
-
-					next()
-				} catch (error: any) {
-					// remove token and go to login page to re-login
-					await store.resetToken()
-					ElMessage.error(error || "Has Error")
-					next(`/login?redirect=${to.path}`)
-					// NProgress.done()
-				}
-			}
-		}
+		next()
 	} else {
-		/* has no token*/
+		if (to.path === "/login") {
+			const {
+				query: { code },
+			} = to
+			await store.login(code)
 
-		if (whiteList.indexOf(to.path) !== -1) {
-			// in the free login whitelist, go directly
+			next({ path: "/dashboard" })
+		} else if (whiteList.includes(to.path)) {
 			next()
 		} else {
-			// other pages that do not have permission to access are redirected to the login page.
-			// await store.getInfo()
-			next()
-			// next(`/login?redirect=${to.path}`)
-			// NProgress.done()
+			// const params = { redirect_url: "http://localhost:3000/login" }
+			// await authorize(params)
+			next({
+				path: "/login",
+				query: {
+					code: "hdOAZjDZH_mSIT0KfPrJJxIHBhiQwRGMTGCIuBEUbbE",
+				},
+			})
 		}
 	}
 })
 
-router.afterEach(() => {
-	// finish progress bar
-	// NProgress.done()
-})
+router.afterEach(() => {})

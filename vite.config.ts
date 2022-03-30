@@ -43,9 +43,13 @@ export default defineConfig({
     server: {
         proxy: {
             '/ky-api': {
-                target: 'http://127.0.0.1:9501',
+                target: 'https://daily-report.knowyourself.cc/api',
                 changeOrigin: true, //是否跨域
-                rewrite: (path: string) => path.replace(/^\/ky-api/, '')
+                rewrite: (path) => path.replace(/^\/ky-api/, ""),
+            },
+            '/api': {
+                target: 'http://127.0.0.1:5001',
+                changeOrigin: true, //是否跨域
             }
         }
     },

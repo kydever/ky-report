@@ -9,12 +9,12 @@ const frameOut = [
 	//     path: '/',
 	//     redirect: "/dashboard",
 	// },
-	// {
-	//     name: 'login',
-	//     path: '/login',
-	//     meta: { title: '登录' },
-	//     component: () => import('@/views/common/login.vue')
-	// },
+	{
+		name: "login",
+		path: "/login",
+		meta: { title: "登录" },
+		// component: () => import('@/views/common/login.vue')
+	},
 	{
 		name: "not-found",
 		path: "/404",
