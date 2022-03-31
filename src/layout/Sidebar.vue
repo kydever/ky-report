@@ -7,6 +7,7 @@
 				text-color="#BFCBD9"
 				:unique-opened="true"
 				:collapse="collapse"
+				:collapse-transition="collapseTransition"
 				router
 			>
 				<template v-for="menu in menus">
@@ -42,13 +43,16 @@
 
 <script setup lang="ts">
 import { useStore } from "@/store/menu"
-import { defineProps, onMounted, ref } from "vue"
+import { computed, defineProps, onMounted, ref } from "vue"
 import { useRoute } from "vue-router"
+import { useStore as commonStore } from "@/store/common"
 
 const props = defineProps({
 	collapse: Boolean,
 })
 const { menus } = useStore()
+const common = commonStore()
+const collapseTransition = computed(() => !common.isMobile)
 
 const activeSidebar = ref("")
 

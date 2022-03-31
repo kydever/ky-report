@@ -7,10 +7,13 @@
 		</div>
 
 		<el-dropdown trigger="click">
-			<el-icon style="margin-right: 8px; margin-top: 1px">
-				<setting />
-			</el-icon>
-			<span>{{ user.name || "Admin" }}</span>
+			<span class="mr-2">{{ user.name || "Admin" }}</span>
+			<el-image
+				style="width: 36px; height: 36px; border-radius: 50%"
+				:src="user.avatar"
+				fit="cover"
+			/>
+
 			<template #dropdown>
 				<el-dropdown-menu>
 					<el-dropdown-item>登出</el-dropdown-item>
@@ -37,6 +40,12 @@ const user = userStore()
 		display: flex;
 		flex-direction: row;
 		align-items: center;
+	}
+
+	::v-deep .el-tooltip__trigger {
+		display: flex;
+		align-items: center;
+		cursor: pointer;
 	}
 }
 </style>
